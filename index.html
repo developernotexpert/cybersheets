@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CyberCheats — Cybersecurity Cheatsheets</title>
+  <meta name="description" content="A global cheatsheet collection for cybersecurity, cryptography and pentest tools. Search by name or content." />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div class="brand">
+        <a href="#/" class="brand-link">
+          <span class="brand-prompt">root@cyber</span><span class="brand-sep">:~$</span>
+          <span class="brand-name">CyberCheats</span>
+        </a>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">&#9906;</span>
+        <input
+          type="search"
+          id="search-input"
+          placeholder="search tool or text..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <kbd class="search-kbd">/</kbd>
+      </div>
+
+      <nav id="nav"><!-- populated by JS --></nav>
+
+      <div class="sidebar-footer">
+        <span class="dot"></span> <span id="tool-count">0</span> tools
+      </div>
+    </aside>
+
+    <!-- Mobile menu button -->
+    <button id="menu-toggle" aria-label="Menu">&#9776;</button>
+
+    <!-- Content -->
+    <main id="content">
+      <article id="markdown-body" class="markdown-body">
+        <div class="loading">loading…</div>
+      </article>
+    </main>
+    <div id="overlay"></div>
+  </div>
+
+  <!-- marked.js (render Markdown) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <!-- highlight.js (syntax highlighting in code blocks) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <!-- MiniSearch (inverted-index search) — vendored locally, no CDN -->
+  <script src="assets/vendor/minisearch.min.js"></script>
+  <!-- App -->
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
