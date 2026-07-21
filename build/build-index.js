@@ -105,7 +105,8 @@ function build() {
 
   for (const file of files.sort()) {
     const id = file.replace(/\.md$/, "");
-    const raw = fs.readFileSync(path.join(TOOLS_DIR, file), "utf8");
+    // Normalize CRLF/CR to LF so front-matter parsing works regardless of the OS the file was saved on.
+    const raw = fs.readFileSync(path.join(TOOLS_DIR, file), "utf8").replace(/\r\n?/g, "\n");
     const { data, body } = parseFrontMatter(raw);
 
     const name = data.name || firstHeading(body) || id;
