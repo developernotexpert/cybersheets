@@ -184,6 +184,7 @@ async function loadTool(id) {
     const md = await fetchMd(d);
     el.body().innerHTML = marked.parse(stripFrontMatter(md));
     enhanceCodeBlocks();
+    enhanceLinks();
     el.body().querySelectorAll("pre code").forEach((b) => hljs.highlightElement(b));
     window.scrollTo(0, 0);
   } catch (_) {
@@ -249,6 +250,16 @@ function enhanceCodeBlocks() {
       });
     });
     pre.appendChild(btn);
+  });
+}
+
+/* ---- Open external links in a new tab (internal #/tool links stay in-app) ---- */
+function enhanceLinks() {
+  el.body().querySelectorAll("a[href]").forEach((a) => {
+    if (/^https?:\/\//i.test(a.getAttribute("href") || "")) {
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+    }
   });
 }
 
