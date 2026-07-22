@@ -170,6 +170,23 @@ body {
   letter-spacing: .5px;
 }
 
+/* Search result group labels (name / description / content) */
+.group-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  padding: 12px 10px 5px;
+  margin-top: 2px;
+  border-top: 1px solid var(--border-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.group-label::before { content: "▸"; color: var(--accent); font-size: 9px; }
+.group-label:first-of-type { border-top: none; }
+
 .nav-item {
   display: flex;
   flex-direction: column;

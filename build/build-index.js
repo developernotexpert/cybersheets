@@ -25,6 +25,7 @@ const CHECK_ONLY = process.argv.includes("--check");
 // Allowed categories, in preferred sidebar order (pentest workflow).
 // Add new categories here when the project needs them.
 const CATEGORY_ORDER = [
+  "Cheatsheets & Playbooks",
   "Reconnaissance",
   "Port Scanning",
   "Service Enumeration",
@@ -36,6 +37,8 @@ const CATEGORY_ORDER = [
   "Traffic Analysis & Wireless",
   "Forensics & Reverse Engineering",
   "Cryptography",
+  "Cloud",
+  "Utilities & Shell",
   "Firewall & Hardening",
 ];
 
@@ -107,7 +110,13 @@ function build() {
   for (const file of files.sort()) {
     const id = file.replace(/\.md$/, "");
     // Normalize CRLF/CR to LF so front-matter parsing works regardless of the OS the file was saved on.
-    const raw = fs.readFileSync(path.join(TOOLS_DIR, file), "utf8").replace(/\r\n?/g, "\n");
+    let raw;
+    try {
+      raw = fs.readFileSync(path.join(TOOLS_DIR, file), "utf8").replace(/\r\n?/g, "\n");
+    } catch (e) {
+      warnings.push(`${file}: could not be read (${e.code}) — skipped. On Windows this is often antivirus locking the file.`);
+      continue;
+    }
     const { data, body } = parseFrontMatter(raw);
 
     const name = data.name || firstHeading(body) || id;

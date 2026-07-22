@@ -11,6 +11,25 @@
 const CAP_RESULTS = 300;          // don't render more than this many search hits at once
 const AUTO_EXPAND_LIMIT = 40;     // small catalogs open every category; larger ones start collapsed
 
+// One-line explanation of each category, shown on the home page.
+const CATEGORY_DESCRIPTIONS = {
+  "Cheatsheets & Playbooks": "End-to-end workflows and checklists that span several tools — reverse shells, privilege-escalation.",
+  "Reconnaissance": "Discover hosts, domains, subdomains and exposed assets before touching the target.",
+  "Port Scanning": "Find open ports and running services fast, from a single host to whole ranges.",
+  "Service Enumeration": "Dig into SMB, SNMP, LDAP and Active Directory to pull users, shares and configuration.",
+  "Web & Fuzzing": "Map, fingerprint and attack web apps — proxies, fuzzers, injection and CMS scanners.",
+  "Exploitation": "Find and launch exploits against known vulnerabilities.",
+  "Post-Exploitation & PrivEsc": "After a foothold — enumerate the host, escalate privileges and grab credentials.",
+  "Passwords & Hashes": "Crack hashes and brute-force logins, offline and online, plus wordlist tooling.",
+  "Connection & Pivoting": "Move through networks — shells, port forwarding, tunnels and SOCKS proxies.",
+  "Traffic Analysis & Wireless": "Capture and analyze packets, run MITM attacks and audit Wi-Fi.",
+  "Forensics & Reverse Engineering": "Inspect binaries, memory, disks and files — decompilers, carving, steganography.",
+  "Cryptography": "Encrypt, sign and inspect keys, certificates and TLS from the command line.",
+  "Cloud": "Enumerate and test cloud-provider access and misconfigurations.",
+  "Utilities & Shell": "Everyday CLI glue — HTTP requests, JSON, proxy chaining and terminal multiplexing.",
+  "Firewall & Hardening": "Configure and audit host firewalls on Linux.",
+};
+
 const STATE = {
   docs: [],
   byId: new Map(),
@@ -138,20 +157,34 @@ function renderCategoryTree() {
   el.nav().innerHTML = html;
 }
 
-// Search mode: a flat list ranked by relevance.
+// Search mode: grouped by WHERE the match happened — name first, then description, then content.
 function renderSearchResults(q) {
-  const results = runSearch(q);
+  const results = runSearch(q).slice(0, CAP_RESULTS);
   if (!results.length) {
     el.nav().innerHTML = `<div class="no-results">no results for "${escapeHtml(q)}"</div>`;
     return;
   }
-  const shown = results.slice(0, CAP_RESULTS);
-  let html = `<div class="search-meta">${results.length} result(s)${results.length > CAP_RESULTS ? ` · showing ${CAP_RESULTS}` : ""}</div>`;
-  for (const r of shown) {
+
+  const byName = [], byDesc = [], byContent = [];
+  for (const r of results) {
     const d = STATE.byId.get(r.id);
-    if (d) html += navItem(d, q);
+    if (!d) continue;
+    // MiniSearch tells us which fields each term matched, in r.match.
+    const fields = new Set();
+    for (const term in r.match) (r.match[term] || []).forEach((f) => fields.add(f));
+    if (fields.has("name")) byName.push(d);
+    else if (fields.has("description")) byDesc.push(d);
+    else byContent.push(d);   // matched tags or the body text of the .md
   }
-  el.nav().innerHTML = html;
+
+  const section = (label, arr) =>
+    arr.length ? `<div class="group-label">${label} · ${arr.length}</div>` + arr.map((d) => navItem(d, q)).join("") : "";
+
+  el.nav().innerHTML =
+    `<div class="search-meta">${results.length} result(s)</div>` +
+    section("name", byName) +
+    section("description", byDesc) +
+    section("content", byContent);
 }
 
 function navItem(d, q) {
@@ -208,21 +241,36 @@ function renderHome() {
   document.title = "CyberCheats — Cybersecurity Cheatsheets";
   markActive();
 
-  const cards = STATE.docs.map((d) => `
+  const card = (d) => `
     <a class="home-card" href="#/tool/${encodeURIComponent(d.id)}">
       <div class="hc-name">${escapeHtml(d.name)}</div>
-      <div class="hc-cat">${escapeHtml(d.category)}</div>
       <div class="hc-desc">${escapeHtml(d.description)}</div>
-    </a>`).join("");
+    </a>`;
+
+  // One section per category: name + count, a one-line explanation, then its tools.
+  const sections = STATE.categoryOrder.map((cat) => {
+    const items = STATE.byCategory.get(cat) || [];
+    if (!items.length) return "";
+    const desc = CATEGORY_DESCRIPTIONS[cat] || "";
+    return `
+      <section class="home-cat">
+        <div class="home-cat-head">
+          <h2>${escapeHtml(cat)}</h2>
+          <span class="home-cat-count">${items.length}</span>
+        </div>
+        ${desc ? `<p class="home-cat-desc">${escapeHtml(desc)}</p>` : ""}
+        <div class="home-grid">${items.map(card).join("")}</div>
+      </section>`;
+  }).join("");
 
   el.body().innerHTML = `
     <div class="home-hero">
       <div class="glyph">[ ACCESS GRANTED ]</div>
       <h1>CyberCheats</h1>
       <p>A global cheatsheet collection for cybersecurity, cryptography and pentest tools.
-         Pick a tool or use search (press <code>/</code>) by name or content.</p>
+         Pick a category below, or search (press <code>/</code>) by name or content.</p>
     </div>
-    <div class="home-grid">${cards}</div>`;
+    ${sections}`;
   window.scrollTo(0, 0);
 }
 
