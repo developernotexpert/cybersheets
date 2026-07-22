@@ -36,6 +36,7 @@ const CATEGORY_ORDER = [
   "Traffic Analysis & Wireless",
   "Forensics & Reverse Engineering",
   "Cryptography",
+  "Firewall & Hardening",
 ];
 
 /* ---- Minimal YAML front-matter parser (--- ... ---) ---- */
