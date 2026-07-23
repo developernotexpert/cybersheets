@@ -137,10 +137,12 @@ function renderNav() {
 }
 
 // Browse mode: collapsible categories; a category's items only render when it's open.
+// Categories and the tools inside each one are always shown in alphabetical order.
 function renderCategoryTree() {
   let html = "";
-  for (const cat of STATE.categoryOrder) {
-    const items = STATE.byCategory.get(cat) || [];
+  const cats = [...STATE.categoryOrder].sort((a, b) => a.localeCompare(b));
+  for (const cat of cats) {
+    const items = [...(STATE.byCategory.get(cat) || [])].sort((a, b) => a.name.localeCompare(b.name));
     const open = STATE.expanded.has(cat);
     html += `
       <button class="cat-toggle${open ? " open" : ""}" data-cat="${escapeAttr(cat)}">
