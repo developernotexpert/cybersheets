@@ -250,8 +250,10 @@ function renderHome() {
     </a>`;
 
   // One section per category: name + count, a one-line explanation, then its tools.
-  const sections = STATE.categoryOrder.map((cat) => {
-    const items = STATE.byCategory.get(cat) || [];
+  // Categories and their tools are always listed in alphabetical order.
+  const cats = [...STATE.categoryOrder].sort((a, b) => a.localeCompare(b));
+  const sections = cats.map((cat) => {
+    const items = [...(STATE.byCategory.get(cat) || [])].sort((a, b) => a.name.localeCompare(b.name));
     if (!items.length) return "";
     const desc = CATEGORY_DESCRIPTIONS[cat] || "";
     return `
