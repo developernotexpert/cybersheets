@@ -1,14 +1,12 @@
 name: Validate contributions
 
-# Runs on pull requests that touch cheatsheets or the build.
-# Fails with a clear message if any .md has invalid front-matter,
-# so contributors get instant feedback without running anything locally.
+# Runs on every pull request targeting main, so it can be a reliable
+# required status check. Fails with a clear message if any .md has
+# invalid front-matter, giving contributors instant feedback.
 
 on:
   pull_request:
-    paths:
-      - "tools/**"
-      - "build/**"
+    branches: [main]
 
 jobs:
   validate:
