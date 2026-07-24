@@ -27,6 +27,7 @@ const CHECK_ONLY = process.argv.includes("--check");
 const SITE_ORIGIN = "https://developernotexpert.github.io";
 const SITE_BASE = "/cybersheets";                 // repo/base path, no trailing slash
 const SITE_URL = SITE_ORIGIN + SITE_BASE + "/";   // canonical home URL
+const REPO_URL = "https://github.com/developernotexpert/cybersheets";  // source repo
 
 // Allowed categories, in preferred sidebar order (pentest workflow).
 // Add new categories here when the project needs them.
@@ -282,10 +283,21 @@ function toolPageHtml(p) {
 <body class="doc-standalone">
   <div class="doc-wrap">
     <header class="doc-topbar">
-      <a class="doc-home" href="${SITE_BASE}/"><span class="brand-prompt">root@cyber</span><span class="brand-sep">:~$</span> CyberSheets</a>
+      <a class="doc-home" href="${SITE_BASE}/"><span class="brand-prompt">root@cyber</span><span class="brand-sep">:~#</span> CyberSheets</a>
       <span class="doc-cat">${escAttr(p.category)}</span>
     </header>
     <article class="markdown-body">${bodyHtml}</article>
+    <aside class="contrib-term">
+      <div class="contrib-term-bar">
+        <span class="contrib-term-title">root@cyber: ~</span>
+        <span class="contrib-term-btns"><i>&#9472;</i><i>&#9633;</i><i>&#10005;</i></span>
+      </div>
+      <div class="contrib-cta">
+        <p class="contrib-cta-title"><span class="contrib-cta-mark">root@cyber:~#</span>Missing a command, or spot a mistake?</p>
+        <p class="contrib-cta-text"><span class="contrib-cta-mark">root@cyber:~#</span>This whole sheet is a single Markdown file — edit it and open a pull request.</p>
+        <a class="contrib-cta-btn" href="${REPO_URL}/edit/main/tools/${p.id}.md" target="_blank" rel="noopener noreferrer">improve_this_page()</a>
+      </div>
+    </aside>
     <footer class="doc-foot">
       <a href="${SITE_BASE}/">&larr; Browse and search all cheatsheets</a>
     </footer>

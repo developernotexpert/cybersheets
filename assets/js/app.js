@@ -11,6 +11,23 @@
 const CAP_RESULTS = 300;          // don't render more than this many search hits at once
 const AUTO_EXPAND_LIMIT = 40;     // small catalogs open every category; larger ones start collapsed
 const SITE_URL = "https://developernotexpert.github.io/cybersheets/";  // for canonical URLs
+const REPO_URL = "https://github.com/developernotexpert/cybersheets";  // source repo
+
+// "Improve this page" call-to-action appended to the bottom of every tool view.
+function contribCta(d) {
+  return `
+    <aside class="contrib-term">
+      <div class="contrib-term-bar">
+        <span class="contrib-term-title">root@cyber: ~</span>
+        <span class="contrib-term-btns"><i>&#9472;</i><i>&#9633;</i><i>&#10005;</i></span>
+      </div>
+      <div class="contrib-cta">
+        <p class="contrib-cta-title"><span class="contrib-cta-mark">root@cyber:~#</span>Missing a command, or spot a mistake?</p>
+        <p class="contrib-cta-text"><span class="contrib-cta-mark">root@cyber:~#</span>This whole sheet is a single Markdown file — edit it and open a pull request.</p>
+        <a class="contrib-cta-btn" href="${REPO_URL}/edit/main/${d.file}" target="_blank" rel="noopener noreferrer">improve_this_page()</a>
+      </div>
+    </aside>`;
+}
 
 // Point the canonical link at the crawlable static page for the current view.
 function setCanonical(url) {
@@ -226,7 +243,7 @@ async function loadTool(id) {
 
   try {
     const md = await fetchMd(d);
-    el.body().innerHTML = marked.parse(stripFrontMatter(md));
+    el.body().innerHTML = marked.parse(stripFrontMatter(md)) + contribCta(d);
     enhanceCodeBlocks();
     enhanceLinks();
     el.body().querySelectorAll("pre code").forEach((b) => hljs.highlightElement(b));
@@ -357,6 +374,22 @@ function setupEvents() {
 
   $("#menu-toggle").addEventListener("click", toggleSidebar);
   el.overlay().addEventListener("click", closeSidebar);
+
+  setupContributeModal();
+}
+
+// Floating GitHub button opens the "how to contribute" modal.
+function setupContributeModal() {
+  const fab = $("#gh-fab");
+  const modal = $("#contrib-modal");
+  if (!fab || !modal) return;
+  const open = () => { modal.hidden = false; };
+  const close = () => { modal.hidden = true; };
+  fab.addEventListener("click", open);
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal || e.target.closest(".modal-close")) close();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
 }
 
 function toggleSidebar() { el.sidebar().classList.toggle("open"); el.overlay().classList.toggle("show"); }
