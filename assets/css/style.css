@@ -468,6 +468,78 @@ body.doc-standalone { overflow-y: auto; }
 }
 @keyframes cc-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 
+/* ===== 404 — Tool not found ===== */
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding-top: 48px;
+}
+.nf-term {
+  width: 100%;
+  max-width: 540px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-alt);
+  font-family: var(--mono);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.nf-term-body {
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.75;
+}
+.nf-term-body p { margin: 0; }
+.nf-prompt { color: var(--accent); margin-right: 8px; }
+.nf-error { color: var(--danger); }
+.nf-message {
+  text-align: center;
+  max-width: 440px;
+}
+.nf-message h1 {
+  font-size: 22px;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+.nf-message p {
+  font-size: 15px;
+  color: var(--text-dim);
+  margin: 0 0 24px;
+}
+.nf-message code {
+  color: var(--accent);
+  background: rgba(0, 255, 156, 0.08);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.nf-btn {
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: background 0.15s, border-color 0.15s;
+}
+.nf-btn:hover { border-color: var(--accent); background: var(--accent-glow); }
+.nf-btn-primary {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.nf-btn-primary:hover {
+  background: var(--accent);
+  color: #04120c;
+}
+
 /* ===== Content ===== */
 #content {
   flex: 1;

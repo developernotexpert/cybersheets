@@ -233,7 +233,7 @@ function route() {
 
 async function loadTool(id) {
   const d = STATE.byId.get(id);
-  if (!d) return renderHome();
+  if (!d) return render404(id);
 
   STATE.currentId = id;
   markActive();
@@ -394,6 +394,39 @@ function setupContributeModal() {
 
 function toggleSidebar() { el.sidebar().classList.toggle("open"); el.overlay().classList.toggle("show"); }
 function closeSidebar() { el.sidebar().classList.remove("open"); el.overlay().classList.remove("show"); }
+
+/* ---- 404 — tool not found ---- */
+function render404(id) {
+  STATE.currentId = null;
+  document.title = "404 — CyberSheets";
+  markActive();
+  const safe = escapeHtml(id);
+  const newFileUrl = `${REPO_URL}/new/main/tools?filename=${encodeURIComponent(id)}.md&value=${encodeURIComponent("---\nname: " + id + "\ncategory: \ndescription: \ntags: []\n---\n\n# " + id + "\n")}`;
+  el.body().innerHTML = `
+    <div class="not-found">
+      <div class="nf-term">
+        <div class="contrib-term-bar">
+          <span class="contrib-term-title">root@cyber: ~</span>
+          <span class="contrib-term-btns"><i>&#9472;</i><i>&#9633;</i><i>&#10005;</i></span>
+        </div>
+        <div class="nf-term-body">
+          <p><span class="nf-prompt">root@cyber:~#</span> cat tool/${safe}.md</p>
+          <p class="nf-error">cat: tool/${safe}.md: No such file or directory</p>
+          <p><span class="nf-prompt">root@cyber:~#</span> echo $?</p>
+          <p class="nf-error">404</p>
+        </div>
+      </div>
+      <div class="nf-message">
+        <h1>Tool not found</h1>
+        <p>There's no cheatsheet for <code>${safe}</code> yet — but you can create it.</p>
+        <div class="nf-actions">
+          <a class="nf-btn nf-btn-primary" href="${newFileUrl}" target="_blank" rel="noopener noreferrer">Create this cheatsheet</a>
+          <a class="nf-btn" href="#/">Browse all tools</a>
+        </div>
+      </div>
+    </div>`;
+  window.scrollTo(0, 0);
+}
 
 /* ---- Helpers ---- */
 function stripFrontMatter(md) { return md.replace(/^---\s*\n[\s\S]*?\n---\s*\n?/, ""); }
