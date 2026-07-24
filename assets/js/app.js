@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------
-   CyberCheats — front-end app
+   CyberSheets — front-end app
 
    Single-page, no framework. It fetches one prebuilt index
    (tools/search-index.json), renders the sidebar from it, and only
@@ -10,6 +10,14 @@
 
 const CAP_RESULTS = 300;          // don't render more than this many search hits at once
 const AUTO_EXPAND_LIMIT = 40;     // small catalogs open every category; larger ones start collapsed
+const SITE_URL = "https://developernotexpert.github.io/cybersheets/";  // for canonical URLs
+
+// Point the canonical link at the crawlable static page for the current view.
+function setCanonical(url) {
+  let link = document.querySelector('link[rel="canonical"]');
+  if (!link) { link = document.createElement("link"); link.rel = "canonical"; document.head.appendChild(link); }
+  link.href = url;
+}
 
 // One-line explanation of each category, shown on the home page.
 const CATEGORY_DESCRIPTIONS = {
@@ -212,7 +220,8 @@ async function loadTool(id) {
 
   STATE.currentId = id;
   markActive();
-  document.title = `${d.name} — CyberCheats`;
+  setCanonical(`${SITE_URL}t/${encodeURIComponent(id)}.html`);
+  document.title = `${d.name} — CyberSheets`;
   el.body().innerHTML = `<div class="loading">loading ${escapeHtml(d.name)}…</div>`;
 
   try {
@@ -240,7 +249,8 @@ async function fetchMd(d) {
 
 function renderHome() {
   STATE.currentId = null;
-  document.title = "CyberCheats — Cybersecurity Cheatsheets";
+  document.title = "CyberSheets — Cybersecurity Cheatsheets";
+  setCanonical(SITE_URL);
   markActive();
 
   const card = (d) => `
@@ -270,7 +280,7 @@ function renderHome() {
   el.body().innerHTML = `
     <div class="home-hero">
       <div class="glyph">[ ACCESS GRANTED ]</div>
-      <h1>CyberCheats</h1>
+      <h1>CyberSheets</h1>
       <p>A global cheatsheet collection for cybersecurity, cryptography and pentest tools.
          Pick a category below, or search (press <code>/</code>) by name or content.</p>
     </div>

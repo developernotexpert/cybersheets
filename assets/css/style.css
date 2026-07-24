@@ -1,4 +1,4 @@
-/* ========= CyberCheats — dark hacker/terminal theme ========= */
+/* ========= CyberSheets — dark hacker/terminal theme ========= */
 :root {
   --bg:            #0a0e14;
   --bg-alt:        #0d1219;
@@ -243,6 +243,50 @@ mark.hl {
   box-shadow: 0 0 6px var(--accent);
   margin-right: 4px;
 }
+
+/* ===== Standalone pre-rendered tool page (/t/<id>.html) ===== */
+body.doc-standalone { overflow-y: auto; }
+.doc-wrap { max-width: 900px; margin: 0 auto; padding: 24px 24px 80px; }
+.doc-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0 18px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.doc-home {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+.doc-home .brand-prompt { color: var(--accent); }
+.doc-home .brand-sep { color: var(--text-dim); }
+.doc-cat {
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3px 10px;
+}
+.doc-foot {
+  margin-top: 48px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.doc-foot a {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent-cyan);
+  text-decoration: none;
+}
+.doc-foot a:hover { color: var(--accent); }
 
 /* ===== Content ===== */
 #content {

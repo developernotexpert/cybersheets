@@ -1,4 +1,4 @@
-# CyberCheats
+# CyberSheets
 
 A community collection of cybersecurity, cryptography and pentest cheatsheets. It's a static site — no backend, just HTML/CSS/JS — meant to live on GitHub Pages. Each tool is a Markdown file rendered in the page, and you can search either by tool name or by anything written inside the sheets.
 
@@ -26,8 +26,8 @@ You don't build or generate anything by hand. Open a pull request with your `.md
 The quickest path is straight from GitHub: open `tools/_TEMPLATE.md`, hit the edit pencil (it forks the repo for you), rename the file, paste your sheet, and propose the change. If you'd rather work locally:
 
 ```bash
-git clone https://github.com/<you>/CyberCheats.git
-cd CyberCheats
+git clone https://github.com/<you>/CyberSheets.git
+cd CyberSheets
 cp tools/_TEMPLATE.md tools/mytool.md
 # write it, then optionally preview:
 node build/build-index.js && python -m http.server 8000
@@ -48,6 +48,10 @@ Favor real commands with short comments over long explanations. Fence code block
 There's no server, so the page can't list files on its own. A small Node script (`build/build-index.js`) reads every sheet's front-matter and body and writes a single `search-index.json`. The site downloads that one file, builds a [MiniSearch](https://github.com/lucaong/minisearch) index in the background, and only fetches a tool's Markdown when you actually open it. That holds up even with thousands of sheets: search stays in the single-digit milliseconds, and indexing never blocks the first paint. `search-index.json` is generated, so it's git-ignored and rebuilt by CI on every deploy — don't commit or hand-edit it.
 
 Handy shortcut: press `/` to jump to search, `Esc` to clear it.
+
+## SEO / pre-rendered pages
+
+The interactive app uses hash routing (`#/tool/...`), which search engines don't index as separate pages. So the build also pre-renders one **static, crawlable HTML page per tool** at `/t/<id>.html` — full content in the HTML (no JS needed), with its own `<title>`, description, canonical and Open Graph tags — plus a `sitemap.xml`. These are the pages Google indexes and that get shared on social. Visitors still load pages one at a time: each `/t/<id>.html` is an independent file, and the app itself keeps lazy-loading a tool's Markdown only when opened. Like the search index, `t/` and `sitemap.xml` are generated (git-ignored) and rebuilt by CI. Set your site URL in `SITE_ORIGIN`/`SITE_BASE` at the top of `build/build-index.js`.
 
 ## Running locally
 

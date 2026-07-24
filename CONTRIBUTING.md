@@ -1,4 +1,4 @@
-# Contributing to CyberCheats
+# Contributing to CyberSheets
 
 Thanks for helping build a global cybersecurity cheatsheet collection! Adding a page is meant to be simple: **you write one Markdown file and open a Pull Request. That's it.** You never run a build or edit any generated file — automation (GitHub Actions) rebuilds the search index and publishes the site on merge.
 
