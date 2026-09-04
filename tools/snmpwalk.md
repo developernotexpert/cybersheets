@@ -2,7 +2,7 @@
 name: snmpwalk
 category: Service Enumeration
 description: Walk and extract the MIB tree from SNMP-enabled devices.
-tags: [snmp, mib, enum, network, oid]
+tags: [snmp, mib, enum, network, oid, RTFM]
 ---
 
 # snmpwalk

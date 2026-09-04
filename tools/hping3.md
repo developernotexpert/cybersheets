@@ -2,7 +2,7 @@
 name: hping3
 category: Port Scanning
 description: Custom TCP/IP packet crafter/analyzer for firewall, IDS and stress testing.
-tags: [packet, tcp, firewall, ids, dos, spoofing]
+tags: [packet, tcp, firewall, ids, dos, spoofing, RTFM]
 ---
 
 # hping3

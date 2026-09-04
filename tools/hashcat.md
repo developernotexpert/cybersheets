@@ -2,7 +2,7 @@
 name: Hashcat
 category: Passwords & Hashes
 description: GPU-accelerated password/hash cracker with dictionary, rule, mask and hybrid attacks.
-tags: [hashcat, hash, password, gpu, crack, wordlist, mask]
+tags: [hashcat, hash, password, gpu, crack, wordlist, mask, RTFM]
 ---
 
 # Hashcat

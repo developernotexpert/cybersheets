@@ -2,7 +2,7 @@
 name: Hydra
 category: Passwords & Hashes
 description: Fast online credential brute-forcer for 50+ protocols.
-tags: [hydra, bruteforce, login, ssh, ftp, http, online]
+tags: [hydra, bruteforce, login, ssh, ftp, http, online, RTFM]
 ---
 
 # Hydra

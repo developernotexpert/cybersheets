@@ -2,7 +2,7 @@
 name: tcpdump
 category: Traffic Analysis & Wireless
 description: CLI packet capture and analysis using pcap filters.
-tags: [tcpdump, pcap, sniffer, packets, network, bpf]
+tags: [tcpdump, pcap, sniffer, packets, network, bpf, RTFM, BTFM]
 ---
 
 # tcpdump

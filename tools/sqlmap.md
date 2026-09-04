@@ -2,7 +2,7 @@
 name: sqlmap
 category: Web & Fuzzing
 description: Automated detection and exploitation of SQL injection, plus DB extraction.
-tags: [sqli, injection, database, dump, web, exploit]
+tags: [sqli, injection, database, dump, web, exploit, RTFM]
 ---
 
 # sqlmap

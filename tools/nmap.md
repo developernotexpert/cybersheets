@@ -2,7 +2,7 @@
 name: Nmap
 category: Reconnaissance
 description: Industry-standard network scanner for host discovery, ports and service/OS detection.
-tags: [scan, network, ports, recon, discovery, nse]
+tags: [scan, network, ports, recon, discovery, nse, RTFM, BTFM]
 ---
 
 # Nmap

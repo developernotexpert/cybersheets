@@ -2,7 +2,7 @@
 name: Scapy
 category: Traffic Analysis & Wireless
 description: Interactive Python packet crafting, sniffing, spoofing and network scanning.
-tags: [scapy, packet, crafting, sniffing, spoofing, python, pcap]
+tags: [scapy, packet, crafting, sniffing, spoofing, python, pcap, RTFM]
 ---
 
 # Scapy

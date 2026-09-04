@@ -2,7 +2,7 @@
 name: John the Ripper
 category: Passwords & Hashes
 description: Highly customizable offline password hash cracker with many formats.
-tags: [john, jtr, hash, password, crack, wordlist]
+tags: [john, jtr, hash, password, crack, wordlist, RTFM]
 ---
 
 # John the Ripper

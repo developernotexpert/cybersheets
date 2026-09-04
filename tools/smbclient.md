@@ -2,7 +2,7 @@
 name: smbclient
 category: Service Enumeration
 description: FTP-like client to interact with SMB/CIFS file shares.
-tags: [smb, cifs, share, windows, samba, files]
+tags: [smb, cifs, share, windows, samba, files, RTFM]
 ---
 
 # smbclient

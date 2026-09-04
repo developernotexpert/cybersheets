@@ -2,7 +2,7 @@
 name: msfconsole
 category: Exploitation
 description: Metasploit Framework console to select, configure and run exploits.
-tags: [metasploit, exploit, payload, meterpreter, msfvenom]
+tags: [metasploit, exploit, payload, meterpreter, msfvenom, RTFM]
 ---
 
 # msfconsole

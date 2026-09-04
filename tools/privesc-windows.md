@@ -2,7 +2,7 @@
 name: Windows PrivEsc Checklist
 category: Cheatsheets & Playbooks
 description: Manual local privilege escalation checks for Windows — services, tokens, creds.
-tags: [privesc, windows, seimpersonate, services, uac, tokens, oscp]
+tags: [privesc, windows, seimpersonate, services, uac, tokens, oscp, RTFM]
 ---
 
 # Windows PrivEsc Checklist

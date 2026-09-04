@@ -2,7 +2,7 @@
 name: UFW
 category: Firewall & Hardening
 description: Uncomplicated Firewall — simple front-end for host rules on Debian/Ubuntu.
-tags: [ufw, firewall, ubuntu, debian, iptables, host]
+tags: [ufw, firewall, ubuntu, debian, iptables, host, BTFM]
 ---
 
 # UFW

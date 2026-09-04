@@ -2,7 +2,7 @@
 name: socat
 category: Connection & Pivoting
 description: Advanced relay between two byte streams (SSL/TLS, SOCKS, IPv6).
-tags: [socat, relay, tunnel, tls, pivot, portforward]
+tags: [socat, relay, tunnel, tls, pivot, portforward, RTFM]
 ---
 
 # socat

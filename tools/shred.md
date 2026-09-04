@@ -2,7 +2,7 @@
 name: shred
 category: Forensics & Reverse Engineering
 description: Securely overwrite and delete files so they can't be recovered.
-tags: [shred, secure-delete, wipe, anti-forensics, data-destruction]
+tags: [shred, secure-delete, wipe, anti-forensics, data-destruction, RTFM]
 ---
 
 # shred

@@ -2,7 +2,7 @@
 name: Netcat (nc) / Ncat
 category: Connection & Pivoting
 description: Read, write and redirect raw TCP/UDP connections; banner grabbing and reverse shells.
-tags: [netcat, ncat, shell, reverse, banner, transfer]
+tags: [netcat, ncat, shell, reverse, banner, transfer, RTFM, BTFM]
 ---
 
 # Netcat (nc) / Ncat
