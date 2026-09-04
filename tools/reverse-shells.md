@@ -2,7 +2,7 @@
 name: Reverse Shells
 category: Cheatsheets & Playbooks
 description: Step-by-step — listen, fire a payload, stabilize, keep the shell.
-tags: [reverse-shell, bind-shell, payload, oscp, tty, listener]
+tags: [reverse-shell, bind-shell, payload, oscp, tty, listener, RTFM]
 ---
 
 # Reverse Shells
