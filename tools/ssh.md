@@ -2,7 +2,7 @@
 name: SSH (OpenSSH)
 category: Connection & Pivoting
 description: Remote shell plus port forwarding and pivoting (-L, -R, -D, ProxyJump).
-tags: [ssh, tunnel, portforward, socks, pivot, proxyjump, keys]
+tags: [ssh, tunnel, portforward, socks, pivot, proxyjump, keys, RTFM]
 ---
 
 # SSH (OpenSSH)

@@ -2,7 +2,7 @@
 name: DNSRecon
 category: Reconnaissance
 description: DNS record auditing and enumeration (AXFR, brute-force, reverse).
-tags: [dns, axfr, zone-transfer, recon, subdomain]
+tags: [dns, axfr, zone-transfer, recon, subdomain, RTFM]
 ---
 
 # DNSRecon

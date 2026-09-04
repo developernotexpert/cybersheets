@@ -2,7 +2,7 @@
 name: Google Dorks
 category: Reconnaissance
 description: Advanced search operators for OSINT and information gathering.
-tags: [osint, google, dork, recon, search]
+tags: [osint, google, dork, recon, search, RTFM]
 ---
 
 # Google Dorks

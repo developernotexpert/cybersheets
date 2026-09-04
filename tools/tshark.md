@@ -2,7 +2,7 @@
 name: tshark
 category: Traffic Analysis & Wireless
 description: Wireshark's CLI for capturing and programmatically analyzing .pcap files.
-tags: [tshark, wireshark, pcap, cli, packets, fields]
+tags: [tshark, wireshark, pcap, cli, packets, fields, BTFM]
 ---
 
 # tshark

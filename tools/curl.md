@@ -2,7 +2,7 @@
 name: curl
 category: Utilities & Shell
 description: Transfer data over HTTP and many protocols — the CLI HTTP workhorse.
-tags: [curl, http, api, request, transfer, download]
+tags: [curl, http, api, request, transfer, download, RTFM]
 ---
 
 # curl

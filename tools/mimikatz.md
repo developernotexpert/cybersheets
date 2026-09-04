@@ -2,7 +2,7 @@
 name: Mimikatz
 category: Post-Exploitation & PrivEsc
 description: Extract plaintext passwords, hashes, PINs and Kerberos tickets from Windows memory.
-tags: [mimikatz, credentials, lsass, kerberos, pth, ptt, windows]
+tags: [mimikatz, credentials, lsass, kerberos, pth, ptt, windows, RTFM]
 ---
 
 # Mimikatz

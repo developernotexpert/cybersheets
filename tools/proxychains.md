@@ -2,7 +2,7 @@
 name: proxychains
 category: Connection & Pivoting
 description: Force any TCP tool through a SOCKS/HTTP proxy chain.
-tags: [proxychains, socks, pivot, proxy, tunnel, tor]
+tags: [proxychains, socks, pivot, proxy, tunnel, tor, RTFM]
 ---
 
 # proxychains

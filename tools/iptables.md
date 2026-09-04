@@ -2,7 +2,7 @@
 name: iptables
 category: Firewall & Hardening
 description: Classic Linux netfilter firewall — chains, rules and NAT.
-tags: [iptables, firewall, netfilter, nat, linux, packet-filter]
+tags: [iptables, firewall, netfilter, nat, linux, packet-filter, RTFM, BTFM]
 ---
 
 # iptables

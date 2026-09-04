@@ -2,7 +2,7 @@
 name: Wireshark
 category: Traffic Analysis & Wireless
 description: Interactive packet analyzer with a rich display-filter language.
-tags: [wireshark, pcap, packets, sniffer, filters, network]
+tags: [wireshark, pcap, packets, sniffer, filters, network, RTFM]
 ---
 
 # Wireshark
