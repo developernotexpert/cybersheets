@@ -120,6 +120,32 @@ body {
   background: var(--bg);
 }
 
+/* Tag filters */
+.tag-filters {
+  display: flex;
+  gap: 6px;
+  padding: 4px 12px 8px;
+}
+.tag-btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all .15s ease;
+}
+.tag-btn:hover { border-color: var(--accent); color: var(--accent); }
+.tag-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.tag-btn.active:hover { opacity: .85; }
+
 /* Nav */
 #nav {
   flex: 1;
