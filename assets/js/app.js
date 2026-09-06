@@ -65,6 +65,7 @@ const STATE = {
   currentId: null,
   query: "",
   expanded: new Set(),
+  activeTag: null,
 };
 
 const $ = (s) => document.querySelector(s);
@@ -113,6 +114,10 @@ async function init() {
     renderNav();   // sidebar is ready immediately from the catalog
     route();
 
+    // Show tag filter buttons once docs are loaded
+    const tagFilters = $("#tag-filters");
+    if (tagFilters) tagFilters.hidden = false;
+
     // Build the search index during idle time so it never blocks the first paint.
     const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
     idle(buildSearchEngine);
@@ -155,6 +160,11 @@ function runSearch(q) {
 }
 
 /* ---- Sidebar ---- */
+function matchesTagFilter(d) {
+  if (!STATE.activeTag) return true;
+  return Array.isArray(d.tags) && d.tags.includes(STATE.activeTag);
+}
+
 function renderNav() {
   const q = STATE.query.trim();
   if (q) return renderSearchResults(q);
@@ -167,7 +177,8 @@ function renderCategoryTree() {
   let html = "";
   const cats = [...STATE.categoryOrder].sort((a, b) => a.localeCompare(b));
   for (const cat of cats) {
-    const items = [...(STATE.byCategory.get(cat) || [])].sort((a, b) => a.name.localeCompare(b.name));
+    const items = [...(STATE.byCategory.get(cat) || [])].filter(matchesTagFilter).sort((a, b) => a.name.localeCompare(b.name));
+    if (!items.length) continue;
     const open = STATE.expanded.has(cat);
     html += `
       <button class="cat-toggle${open ? " open" : ""}" data-cat="${escapeAttr(cat)}">
@@ -195,7 +206,7 @@ function renderSearchResults(q) {
   const byName = [], byDesc = [], byContent = [];
   for (const r of results) {
     const d = STATE.byId.get(r.id);
-    if (!d) continue;
+    if (!d || !matchesTagFilter(d)) continue;
     // MiniSearch tells us which fields each term matched, in r.match.
     const fields = new Set();
     for (const term in r.match) (r.match[term] || []).forEach((f) => fields.add(f));
@@ -280,7 +291,7 @@ function renderHome() {
   // Categories and their tools are always listed in alphabetical order.
   const cats = [...STATE.categoryOrder].sort((a, b) => a.localeCompare(b));
   const sections = cats.map((cat) => {
-    const items = [...(STATE.byCategory.get(cat) || [])].sort((a, b) => a.name.localeCompare(b.name));
+    const items = [...(STATE.byCategory.get(cat) || [])].filter(matchesTagFilter).sort((a, b) => a.name.localeCompare(b.name));
     if (!items.length) return "";
     const desc = CATEGORY_DESCRIPTIONS[cat] || "";
     return `
@@ -370,6 +381,23 @@ function setupEvents() {
     if (e.key === "Escape") {
       el.search().value = ""; STATE.query = ""; renderNav(); el.search().blur();
     }
+  });
+
+  // Tag filter buttons
+  document.querySelectorAll(".tag-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.getAttribute("data-tag");
+      if (STATE.activeTag === tag) {
+        STATE.activeTag = null;
+        btn.classList.remove("active");
+      } else {
+        document.querySelectorAll(".tag-btn").forEach((b) => b.classList.remove("active"));
+        STATE.activeTag = tag;
+        btn.classList.add("active");
+      }
+      renderNav();
+      if (!STATE.currentId) renderHome();
+    });
   });
 
   $("#menu-toggle").addEventListener("click", toggleSidebar);
