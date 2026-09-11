@@ -47,6 +47,7 @@ const CATEGORY_ORDER = [
   "Cloud",
   "Utilities & Shell",
   "Firewall & Hardening",
+  "Website Tools",
 ];
 
 /* ---- Minimal YAML front-matter parser (--- ... ---) ---- */

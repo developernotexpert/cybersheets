@@ -53,6 +53,7 @@ const CATEGORY_DESCRIPTIONS = {
   "Cloud": "Enumerate and test cloud-provider access and misconfigurations.",
   "Utilities & Shell": "Everyday CLI glue — HTTP requests, JSON, proxy chaining and terminal multiplexing.",
   "Firewall & Hardening": "Configure and audit host firewalls on Linux.",
+  "Website Tools": "Essential cybersecurity websites — threat intel, OSINT, vulnerability databases and network analysis.",
 };
 
 const STATE = {
@@ -179,6 +180,10 @@ function renderCategoryTree() {
   for (const cat of cats) {
     const items = [...(STATE.byCategory.get(cat) || [])].filter(matchesTagFilter).sort((a, b) => a.name.localeCompare(b.name));
     if (!items.length) continue;
+    if (items.length === 1 && items[0].name === cat) {
+      html += navItem(items[0], "");
+      continue;
+    }
     const open = STATE.expanded.has(cat);
     html += `
       <button class="cat-toggle${open ? " open" : ""}" data-cat="${escapeAttr(cat)}">
